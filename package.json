@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.5.2"
+    "@georgedoescode/spline": "^1.0.1",
+    "astro": "^5.5.2",
+    "simplex-noise": "^4.0.3"
   }
 }

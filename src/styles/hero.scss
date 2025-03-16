@@ -1,0 +1,31 @@
+@use "theme";
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__visual {
+    flex: 1;
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__headline {
+    font-size: 3rem;
+    font-weight: bold;
+    color: theme.$primary;
+  }
+
+  &__subheadline {
+    font-size: 1.5rem;
+  }
+}

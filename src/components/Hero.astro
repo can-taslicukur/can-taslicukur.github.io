@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+import "../styles/hero.css";
+---
+
+<div class="hero">
+  <div class="hero__text">
+    <h1 class="hero__headline">Hi, I am Ege</h1>
+    <p class="hero__subheadline">I like to build things</p>
+  </div>
+  <div class="hero__visual">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="gradient" gradientTransform="rotate(90)">
+          <stop id="gradientStop1" offset="0%" stop-color="var(--startColor)"
+          ></stop>
+          <stop id="gradientStop2" offset="100%" stop-color="var(--stopColor)"
+          ></stop>
+        </linearGradient>
+      </defs>
+      <path d="" fill="url('#gradient')"></path>
+    </svg>
+  </div>
+</div>
+<script src="../scripts/hero.js"></script>
