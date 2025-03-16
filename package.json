@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/monaspace-neon": "^5.2.5",
     "astro": "^5.5.2"
   }
 }
