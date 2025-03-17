@@ -1,9 +1,15 @@
+@media screen and (max-width: 600px) {
+  .hero__visual {
+    visibility: hidden;
+    display: none;
+  }
+}
 .hero {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  gap: 5rem;
 }
 .hero__visual {
   flex: 1;
@@ -13,13 +19,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .hero__headline {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #bb86fc;
 }
 .hero__subheadline {
   font-size: 1.5rem;
+}
+.hero__cta {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }

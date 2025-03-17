@@ -1,11 +1,18 @@
 @use "theme";
 
+@media screen and (max-width: 600px) {
+  .hero__visual {
+    visibility: hidden;
+    display: none;
+  }
+}
+
 .hero {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  gap: 5rem;
 
   &__visual {
     flex: 1;
@@ -16,16 +23,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
   }
 
   &__headline {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     color: theme.$primary;
   }
 
   &__subheadline {
     font-size: 1.5rem;
+  }
+
+  &__cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
   }
 }

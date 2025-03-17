@@ -3,10 +3,13 @@ import "../styles/global.css";
 import "../styles/hero.css";
 ---
 
-<div class="hero">
+<section class="hero">
   <div class="hero__text">
-    <h1 class="hero__headline">Hi, I am Ege</h1>
+    <h1 class="hero__headline">Hi 👋, I am Ege</h1>
     <p class="hero__subheadline">I like to build things</p>
+    <div class="hero__cta">
+      <a href="http://www.google.com">Google</a>
+    </div>
   </div>
   <div class="hero__visual">
     <svg viewBox="0 0 200 200">
@@ -17,9 +20,30 @@ import "../styles/hero.css";
           <stop id="gradientStop2" offset="100%" stop-color="var(--stopColor)"
           ></stop>
         </linearGradient>
+        <!-- Add this new glow filter -->
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <!-- Blur the original shape -->
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8.5" result="blur"
+          ></feGaussianBlur>
+          <!-- Create color matrix to intensify glow colors -->
+          <feColorMatrix
+            in="blur"
+            type="matrix"
+            values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 1 0"
+            result="glow"></feColorMatrix>
+          <!-- Merge the original with the glow -->
+          <feMerge>
+            <feMergeNode in="glow"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
       </defs>
-      <path d="" fill="url('#gradient')"></path>
+      <path d="" fill="url('#gradient')" filter="url('#glow')"></path>
     </svg>
   </div>
-</div>
+</section>
 <script src="../scripts/hero.js"></script>

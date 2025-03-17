@@ -28,8 +28,10 @@
   background-color: theme.$background;
   color: theme.$on-background;
   font-size: 16px;
+  height: 100%;
 }
 
 body {
   font-family: theme.$font;
+  padding: 0 15vw;
 }
