@@ -1,159 +1,68 @@
-import { spline } from "@georgedoescode/spline";
-import { createNoise2D } from "simplex-noise";
+import { createNoise3D } from "simplex-noise";
 
-function rescale(x, xRange, targetRange) {
-  return (
-    ((x - xRange[0]) / (xRange[1] - xRange[0])) *
-      (targetRange[1] - targetRange[0]) +
-    targetRange[0]
-  );
+function rescale(x, min = -1, max = 1) {
+  return (x - min) / (max - min);
 }
 
-class Blob {
-  constructor(
-    centerX = 100,
-    centerY = 100,
-    nPoints = 6,
-    radius = 75,
-    noiseFun = createNoise2D(),
-    noiseStep = 0.005
-  ) {
-    this.centerX = centerX;
-    this.centerY = centerY;
-    this.nPoints = nPoints;
-    this.radius = radius;
-    this.noise = noiseFun;
-    this.noiseStep = noiseStep;
-    this.angleStep = (Math.PI * 2) / this.nPoints;
-    this.points = Array.from({ length: nPoints }, (_, i) => {
-      const theta = i * this.angleStep;
+const asciiGradient = [" ", ".", ":", "-", "=", "+", "*", "#", "@"];
 
-      const x = this.centerX + Math.cos(theta) * this.radius;
-      const y = this.centerY + Math.sin(theta) * this.radius;
+const canvas = document.getElementById("hero-background");
+const ctx = canvas.getContext("2d");
+const noise = createNoise3D();
+let time = 0;
+let mouse = {
+  x: null,
+  y: null,
+};
 
-      return {
-        x: x,
-        y: y,
-        originX: x,
-        originY: y,
-        noiseOffsetX: Math.random() * 1000,
-        noiseOffsetY: Math.random() * 1000,
-      };
-    });
-  }
-  applyNoise(noiseMultiplier = 20, minDistanceFactor = 0.75) {
-    this.points.forEach((point, i, arr) => {
-      const nX = this.noise(point.noiseOffsetX, point.noiseOffsetX);
-      const nY = this.noise(point.noiseOffsetY, point.noiseOffsetY);
+const elevationColors = [...Array(10).keys()].map((_, i) =>
+  getComputedStyle(canvas).getPropertyValue(`--elevation-${i}`)
+);
 
-      const x = rescale(
-        nX,
-        [-1, 1],
-        [point.originX - noiseMultiplier, point.originX + noiseMultiplier]
-      );
-      const y = rescale(
-        nY,
-        [-1, 1],
-        [point.originY - noiseMultiplier, point.originY + noiseMultiplier]
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function render(cellSize = 15, timeSpeed = 0.00015) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const rowCellSize = Math.floor(canvas.width / cellSize);
+  const colCellSize = Math.floor(canvas.height / cellSize);
+
+  const cellWidth = canvas.width / rowCellSize;
+  const cellHeight = canvas.height / colCellSize;
+
+  for (let row = 0; row < rowCellSize; row++) {
+    const x = row * cellWidth + cellWidth / 2;
+    for (let col = 0; col < colCellSize; col++) {
+      const y = col * cellHeight + cellHeight / 2;
+      const noiseValue = rescale(
+        noise(
+          rescale(x, 0, canvas.width),
+          rescale(y, 0, canvas.height),
+          time * timeSpeed
+        )
       );
 
-      point.x = x;
-      point.y = y;
-
-      point.noiseOffsetX += this.noiseStep;
-      point.noiseOffsetY += this.noiseStep;
-    });
-  }
-  stretch(mouse, elasticity = 0.5) {
-    function normalizeAngle(angle) {
-      return Math.atan2(Math.sin(angle), Math.cos(angle));
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle =
+        elevationColors[Math.floor(noiseValue * (elevationColors.length - 1))];
+      ctx.font = `40px Monaspace Neon`;
+      ctx.fillText(
+        asciiGradient[Math.floor(noiseValue * asciiGradient.length - 1)],
+        x,
+        y
+      );
     }
-
-    const svgElement = document.querySelector(".hero__visual svg");
-    const svgRect = svgElement.getBoundingClientRect();
-    const svgX = ((mouse.x - svgRect.left) / svgRect.width) * 200;
-    const svgY = ((mouse.y - svgRect.top) / svgRect.height) * 200;
-
-    const dx = svgX - this.centerX;
-    const dy = svgY - this.centerY;
-    const mouseDistance = Math.sqrt(dx * dx + dy * dy);
-    const mouseAngle = Math.atan2(dy, dx);
-
-    this.points.forEach((point) => {
-      const pointAngle = Math.atan2(
-        point.originY - this.centerY,
-        point.originX - this.centerX
-      );
-
-      const angleDiff = normalizeAngle(pointAngle - mouseAngle);
-
-      const distanceFactor = Math.max(
-        minDistanceFactor,
-        this.radius / Math.max(mouseDistance, this.radius)
-      );
-      const alignmentFactor = Math.pow(Math.cos(angleDiff), 2);
-
-      const stretchAmount = distanceFactor * elasticity * alignmentFactor;
-
-      const dirX = Math.cos(mouseAngle);
-      const dirY = Math.sin(mouseAngle);
-
-      if (Math.abs(angleDiff) < Math.PI / 2) {
-        point.x += dirX * stretchAmount;
-        point.y += dirY * stretchAmount;
-      } else {
-        point.x -= dirX * stretchAmount * 0.2;
-        point.y -= dirY * stretchAmount * 0.2;
-      }
-    });
   }
+  time++;
+
+  requestAnimationFrame(() => render(cellSize));
 }
 
-// blob params
-const centerX = 100;
-const centerY = 100;
-const nPoints = 6;
-const radius = 45;
-const noiseFun = createNoise2D();
-const noiseStep = 0.003;
-const blob = new Blob(centerX, centerY, nPoints, radius, noiseFun, noiseStep);
+resize();
+addEventListener("resize", resize);
 
-// blob.applyNoise params
-const noiseMultiplier = radius / 3;
-
-// blob.stretch params
-const mouse = { x: 0, y: 0 };
-document.addEventListener("mousemove", (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-const elasticity = radius / 2;
-const minDistanceFactor = 0.75;
-
-// gradient params
-const hueNoiseOffsetStep = noiseStep / 2;
-let hueNoiseOffset = 0;
-
-const path = document.querySelector(".hero__visual svg path");
-
-(function animate() {
-  path.setAttribute("d", spline(blob.points, 1, true));
-  blob.applyNoise(noiseMultiplier);
-  blob.stretch(mouse, elasticity, minDistanceFactor);
-
-  const hueNoise = noiseFun(hueNoiseOffset, hueNoiseOffset);
-  const hue = rescale(hueNoise, [-1, 1], [0, 360]);
-
-  document.documentElement.style.setProperty(
-    "--startColor",
-    `hsl(${hue}, 100%, 75%)`
-  );
-  document.documentElement.style.setProperty(
-    "--stopColor",
-    `hsl(${hue + 60}, 100%, 75%)`
-  );
-
-  hueNoiseOffset += hueNoiseOffsetStep;
-
-  requestAnimationFrame(animate);
-})();
+render();

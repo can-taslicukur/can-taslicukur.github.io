@@ -1,43 +1,20 @@
-@use "theme";
+@use "./theme";
 
-@media screen and (max-width: 600px) {
-  .hero__visual {
-    visibility: hidden;
-    display: none;
-  }
-}
-
-.hero {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
-
-  &__visual {
-    flex: 1;
-  }
-
-  &__text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &__headline {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: theme.$primary;
-  }
-
-  &__subheadline {
-    font-size: 1.5rem;
-  }
-
-  &__cta {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-  }
+#hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: theme.$background;
+  --background: #{theme.$background};
+  --elevation-0: #{theme.$elevation-0};
+  --elevation-1: #{theme.$elevation-1};
+  --elevation-2: #{theme.$elevation-2};
+  --elevation-3: #{theme.$elevation-3};
+  --elevation-4: #{theme.$elevation-4};
+  --elevation-5: #{theme.$elevation-5};
+  --elevation-6: #{theme.$elevation-6};
+  --elevation-7: #{theme.$elevation-7};
+  --elevation-8: #{theme.$elevation-8};
+  --elevation-9: #{theme.$elevation-9};
 }

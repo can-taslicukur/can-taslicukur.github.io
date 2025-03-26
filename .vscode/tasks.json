@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "astro dev",
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "sass",
+      "type": "shell",
+      "command": "sass ./src/styles:./src/styles --watch --no-source-map",
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

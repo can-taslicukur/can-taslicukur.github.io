@@ -1,35 +1,18 @@
-@media screen and (max-width: 600px) {
-  .hero__visual {
-    visibility: hidden;
-    display: none;
-  }
-}
-.hero {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
-}
-.hero__visual {
-  flex: 1;
-}
-.hero__text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero__headline {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #bb86fc;
-}
-.hero__subheadline {
-  font-size: 1.5rem;
-}
-.hero__cta {
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
+#hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #121212;
+  --background: #121212;
+  --elevation-0: rgba(255, 255, 255, 0);
+  --elevation-1: rgba(255, 255, 255, 0.05);
+  --elevation-2: rgba(255, 255, 255, 0.07);
+  --elevation-3: rgba(255, 255, 255, 0.08);
+  --elevation-4: rgba(255, 255, 255, 0.09);
+  --elevation-5: rgba(255, 255, 255, 0.11);
+  --elevation-6: rgba(255, 255, 255, 0.12);
+  --elevation-7: rgba(255, 255, 255, 0.14);
+  --elevation-8: rgba(255, 255, 255, 0.15);
+  --elevation-9: rgba(255, 255, 255, 0.16);
 }
