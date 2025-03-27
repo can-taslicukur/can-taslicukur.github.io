@@ -29,9 +29,14 @@ function updateElevationColors() {
   );
 }
 updateElevationColors();
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", updateElevationColors);
+const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+let theme = colorScheme.matches ? "dark" : "light";
+colorScheme.addEventListener("change", (e) => {
+  updateElevationColors();
+  theme = e.matches ? "dark" : "light";
+  noiseSmoothing =
+    (theme === "dark" ? 1 : -1) * Math.abs(1 - noiseSmoothing) + 1;
+});
 
 function resize() {
   canvas.width = window.innerWidth;
@@ -40,13 +45,13 @@ function resize() {
   mouse.y = canvas.height / 2;
 }
 
-function render(
-  cellSize = 15,
-  timeSpeed = 0.0003,
-  noiseSmoothing = 1,
-  parallaxStrength = 0.15,
-  easing = 0.1
-) {
+const cellSize = 15;
+const timeSpeed = 0.0003;
+let noiseSmoothing = (theme === "dark" ? 1 : -1) * 0.3 + 1;
+const parallaxStrength = 0.1;
+const easing = 0.1;
+
+function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const mouseNormalizedX = mouse.x / canvas.width - 0.5;
@@ -92,7 +97,7 @@ function render(
   }
   time++;
 
-  requestAnimationFrame(() => render(cellSize));
+  requestAnimationFrame(render);
 }
 
 resize();
