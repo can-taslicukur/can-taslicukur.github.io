@@ -2,37 +2,74 @@
 
 $font: "Monaspace Neon", monospace;
 
-// Base colors
-$primary: #bb86fc;
-$primary-variant: #3700b3;
-$secondary: #03dac6;
-$error: #cf6679;
-$background: #121212;
+$theme: (
+  dark: (
+    // Base colors
+    primary: #bb86fc,
+    primary-variant: #3700b3,
+    secondary: #03dac6,
+    error: #cf6679,
+    background: #121212,
+    // On colors (for text and icons)
+    on-primary: #000000,
+    on-secondary: #000000,
+    on-background: #ffffff,
+    on-error: #000000,
+    // Elevation overlays - Material Design adds white overlays at different opacities
+    // based on elevation level to create depth
+    elevation-0: rgba(255, 255, 255, 0),
+    elevation-1: rgba(255, 255, 255, 0.05),
+    elevation-2: rgba(255, 255, 255, 0.07),
+    elevation-3: rgba(255, 255, 255, 0.08),
+    elevation-4: rgba(255, 255, 255, 0.09),
+    elevation-5: rgba(255, 255, 255, 0.11),
+    elevation-6: rgba(255, 255, 255, 0.12),
+    elevation-7: rgba(255, 255, 255, 0.14),
+    elevation-8: rgba(255, 255, 255, 0.15),
+    elevation-9: rgba(255, 255, 255, 0.16),
+    // Text opacity levels
+    high-emphasis: rgba(255, 255, 255, 0.87),
+    medium-emphasis: rgba(255, 255, 255, 0.6),
+    disabled: rgba(255, 255, 255, 0.38),
+    // Additional common variables
+    divider: rgba(255, 255, 255, 0.12),
+    outline: rgba(255, 255, 255, 0.12),
+  ),
+  light: (
+    // Base colors
+    primary: #6200ee,
+    primary-variant: #3700b3,
+    secondary: #03dac6,
+    error: #b00020,
+    background: #ffffff,
+    surface: #ffffff,
+    // On colors (for text and icons)
+    on-primary: #ffffff,
+    on-secondary: #000000,
+    on-background: #000000,
+    on-error: #ffffff,
+    // Elevation overlays - Material Design adds white overlays at different opacities
+    // based on elevation level to create depth
+    elevation-0: rgba(0, 0, 0, 0),
+    elevation-1: rgba(0, 0, 0, 0.05),
+    elevation-2: rgba(0, 0, 0, 0.07),
+    elevation-3: rgba(0, 0, 0, 0.08),
+    elevation-4: rgba(0, 0, 0, 0.09),
+    elevation-5: rgba(0, 0, 0, 0.11),
+    elevation-6: rgba(0, 0, 0, 0.12),
+    elevation-7: rgba(0, 0, 0, 0.14),
+    elevation-8: rgba(0, 0, 0, 0.15),
+    elevation-9: rgba(0, 0, 0, 0.16),
+    // Text opacity levels
+    high-emphasis: rgba(0, 0, 0, 0.87),
+    medium-emphasis: rgba(0, 0, 0, 0.6),
+    disabled: rgba(0, 0, 0, 0.38),
+    // Additional common variables
+    divider: rgba(0, 0, 0, 0.12),
+    outline: rgba(0, 0, 0, 0.12),
+  ),
+);
 
-// On colors (for text and icons)
-$on-primary: #000000;
-$on-secondary: #000000;
-$on-background: #ffffff;
-$on-error: #000000;
-
-// Elevation overlays - Material Design adds white overlays at different opacities
-// based on elevation level to create depth
-$elevation-0: rgba(255, 255, 255, 0);
-$elevation-1: rgba(255, 255, 255, 0.05);
-$elevation-2: rgba(255, 255, 255, 0.07);
-$elevation-3: rgba(255, 255, 255, 0.08);
-$elevation-4: rgba(255, 255, 255, 0.09);
-$elevation-5: rgba(255, 255, 255, 0.11);
-$elevation-6: rgba(255, 255, 255, 0.12);
-$elevation-7: rgba(255, 255, 255, 0.14);
-$elevation-8: rgba(255, 255, 255, 0.15);
-$elevation-9: rgba(255, 255, 255, 0.16);
-
-// Text opacity levels
-$high-emphasis: rgba(255, 255, 255, 0.87);
-$medium-emphasis: rgba(255, 255, 255, 0.6);
-$disabled: rgba(255, 255, 255, 0.38);
-
-// Additional common variables
-$divider: rgba(255, 255, 255, 0.12);
-$outline: rgba(255, 255, 255, 0.12);
+@function t($theme-name, $property) {
+  @return map-get(map-get($theme, $theme-name), $property);
+}

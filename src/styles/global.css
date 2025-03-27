@@ -15,10 +15,21 @@
   src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-neon@latest/latin-700-normal.woff2) format("woff2"), url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-neon@latest/latin-700-normal.woff) format("woff");
 }
 :root {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   font-size: 16px;
   font-family: "Monaspace Neon", monospace;
   height: 100%;
   width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #121212;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Monaspace Neon", monospace;
+    height: 100%;
+    width: 100%;
+  }
 }

@@ -27,9 +27,16 @@ canvas.addEventListener("mouseleave", () => {
   mouse.entered = false;
 });
 
-const elevationColors = [...Array(10).keys()].map((_, i) =>
-  getComputedStyle(canvas).getPropertyValue(`--elevation-${i}`)
-);
+let elevationColors = [];
+function updateElevationColors() {
+  elevationColors = [...Array(10).keys()].map((_, i) =>
+    getComputedStyle(canvas).getPropertyValue(`--elevation-${i}`)
+  );
+}
+updateElevationColors();
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", updateElevationColors);
 
 function resize() {
   canvas.width = window.innerWidth;
@@ -40,7 +47,7 @@ function render(
   cellSize = 15,
   timeSpeed = 0.0003,
   mouseMaxEffectDistance = 0.07,
-  noiseDampen = 1.4
+  noiseDampen = 1
 ) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 

@@ -5,16 +5,37 @@
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: theme.$background;
-  --background: #{theme.$background};
-  --elevation-0: #{theme.$elevation-0};
-  --elevation-1: #{theme.$elevation-1};
-  --elevation-2: #{theme.$elevation-2};
-  --elevation-3: #{theme.$elevation-3};
-  --elevation-4: #{theme.$elevation-4};
-  --elevation-5: #{theme.$elevation-5};
-  --elevation-6: #{theme.$elevation-6};
-  --elevation-7: #{theme.$elevation-7};
-  --elevation-8: #{theme.$elevation-8};
-  --elevation-9: #{theme.$elevation-9};
+  background-color: theme.t("light", "background");
+  --background: #{theme.t("light", "background")};
+  --elevation-0: #{theme.t("light", "elevation-0")};
+  --elevation-1: #{theme.t("light", "elevation-1")};
+  --elevation-2: #{theme.t("light", "elevation-2")};
+  --elevation-3: #{theme.t("light", "elevation-3")};
+  --elevation-4: #{theme.t("light", "elevation-4")};
+  --elevation-5: #{theme.t("light", "elevation-5")};
+  --elevation-6: #{theme.t("light", "elevation-6")};
+  --elevation-7: #{theme.t("light", "elevation-7")};
+  --elevation-8: #{theme.t("light", "elevation-8")};
+  --elevation-9: #{theme.t("light", "elevation-9")};
+}
+
+@media (prefers-color-scheme: dark) {
+  #hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: theme.t("dark", "background");
+    --background: #{theme.t("dark", "background")};
+    --elevation-0: #{theme.t("dark", "elevation-0")};
+    --elevation-1: #{theme.t("dark", "elevation-1")};
+    --elevation-2: #{theme.t("dark", "elevation-2")};
+    --elevation-3: #{theme.t("dark", "elevation-3")};
+    --elevation-4: #{theme.t("dark", "elevation-4")};
+    --elevation-5: #{theme.t("dark", "elevation-5")};
+    --elevation-6: #{theme.t("dark", "elevation-6")};
+    --elevation-7: #{theme.t("dark", "elevation-7")};
+    --elevation-8: #{theme.t("dark", "elevation-8")};
+    --elevation-9: #{theme.t("dark", "elevation-9")};
+  }
 }
