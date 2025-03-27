@@ -4,27 +4,22 @@ function rescale(x, min = -1, max = 1) {
   return (x - min) / (max - min);
 }
 
-const asciiGradient = [" ", ".", ":", "-", "+", "*", "$", "#", "@"];
-const asciiMouseGradient = ["▫", "░", "▒", "▓"];
+const asciiGradient = [" ", ".", ":", "|", "+", "*", "$", "#", "@"];
 
-const canvas = document.getElementById("hero-background");
+const canvas = document.getElementById("hero__background");
 const ctx = canvas.getContext("2d");
 const noise = createNoise3D();
 let time = 0;
+
 let mouse = {
-  x: null,
-  y: null,
-  entered: false,
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  effectX: 0,
+  effectY: 0,
 };
 canvas.addEventListener("mousemove", (e) => {
   mouse.x = e.offsetX;
   mouse.y = e.offsetY;
-});
-canvas.addEventListener("mouseenter", () => {
-  mouse.entered = true;
-});
-canvas.addEventListener("mouseleave", () => {
-  mouse.entered = false;
 });
 
 let elevationColors = [];
@@ -41,15 +36,25 @@ window
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  mouse.x = canvas.width / 2;
+  mouse.y = canvas.height / 2;
 }
 
 function render(
   cellSize = 15,
   timeSpeed = 0.0003,
-  mouseMaxEffectDistance = 0.07,
-  noiseDampen = 1
+  noiseSmoothing = 1,
+  parallaxStrength = 0.15,
+  easing = 0.1
 ) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const mouseNormalizedX = mouse.x / canvas.width - 0.5;
+  const mouseNormalizedY = mouse.y / canvas.height - 0.5;
+  mouse.effectX +=
+    (mouseNormalizedX * parallaxStrength - mouse.effectX) * easing;
+  mouse.effectY +=
+    (mouseNormalizedY * parallaxStrength - mouse.effectY) * easing;
 
   const rowCellSize = Math.floor(canvas.width / cellSize);
   const colCellSize = Math.floor(canvas.height / cellSize);
@@ -62,22 +67,22 @@ function render(
     for (let col = 0; col < colCellSize; col++) {
       const y = col * cellHeight + cellHeight / 2;
 
-      const noiseValue = Math.pow(
+      let noiseValue = Math.pow(
         rescale(
           noise(
-            rescale(x, 0, canvas.width),
-            rescale(y, 0, canvas.height),
+            rescale(x, 0, canvas.width) + mouse.effectX,
+            rescale(y, 0, canvas.height) + mouse.effectY,
             time * timeSpeed
           )
         ),
-        noiseDampen
+        noiseSmoothing
       );
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+      ctx.font = `40px Monaspace Neon`;
       ctx.fillStyle =
         elevationColors[Math.floor(noiseValue * (elevationColors.length - 1))];
-      ctx.font = `40px Monaspace Neon`;
       ctx.fillText(
         asciiGradient[Math.floor(noiseValue * asciiGradient.length - 1)],
         x,

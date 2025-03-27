@@ -1,4 +1,6 @@
-// Material Dark Theme: https://m2.material.io/design/color/dark-theme.html
+@use "sass:map";
+
+// Material Theme: https://m2.material.io/design
 
 $font: "Monaspace Neon", monospace;
 
@@ -71,5 +73,5 @@ $theme: (
 );
 
 @function t($theme-name, $property) {
-  @return map-get(map-get($theme, $theme-name), $property);
+  @return map.get(map.get($theme, $theme-name), $property);
 }

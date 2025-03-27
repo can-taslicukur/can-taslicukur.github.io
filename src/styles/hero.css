@@ -1,4 +1,4 @@
-#hero-background {
+#hero__background {
   position: absolute;
   top: 0;
   left: 0;
@@ -18,7 +18,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  #hero-background {
+  #hero__background {
     position: absolute;
     top: 0;
     left: 0;
