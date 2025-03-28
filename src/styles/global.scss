@@ -24,22 +24,13 @@
       format("woff");
 }
 
+@include theme.apply-theme();
+
 :root {
-  background-color: theme.t("light", "background");
-  color: theme.t("light", "on-background");
+  background-color: theme.t("background");
+  color: theme.t("on-background");
   font-size: 16px;
   font-family: theme.$font;
   height: 100%;
   width: 100%;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    background-color: theme.t("dark", "background");
-    color: theme.t("dark", "on-background");
-    font-size: 16px;
-    font-family: theme.$font;
-    height: 100%;
-    width: 100%;
-  }
 }

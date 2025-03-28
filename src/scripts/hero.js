@@ -25,7 +25,9 @@ document.addEventListener("mousemove", (e) => {
 let elevationColors = [];
 function updateElevationColors() {
   elevationColors = [...Array(10).keys()].map((_, i) =>
-    getComputedStyle(canvas).getPropertyValue(`--elevation-${i}`)
+    getComputedStyle(document.documentElement).getPropertyValue(
+      `--elevation-${i}`
+    )
   );
 }
 updateElevationColors();

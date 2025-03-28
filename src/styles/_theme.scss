@@ -72,6 +72,24 @@ $theme: (
   ),
 );
 
-@function t($theme-name, $property) {
-  @return map.get(map.get($theme, $theme-name), $property);
+@function t($property) {
+  @return var(--#{$property});
+}
+
+@mixin generate-theme-vars($theme-name) {
+  @each $property, $value in map.get($theme, $theme-name) {
+    --#{$property}: #{$value};
+  }
+}
+
+@mixin apply-theme() {
+  :root {
+    @include generate-theme-vars("light");
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      @include generate-theme-vars("dark");
+    }
+  }
 }
