@@ -17,6 +17,20 @@
   --elevation-9: rgba(0, 0, 0, 0.16);
 }
 
+.hero__text {
+  font-size: 7rem;
+}
+.hero__text--important {
+  font-weight: bold;
+  font-style: italic;
+  color: #6200ee;
+}
+.hero__text--important:hover {
+  background-color: #6200ee;
+  color: #ffffff;
+  font-style: normal;
+}
+
 @media (prefers-color-scheme: dark) {
   #hero__background {
     position: absolute;
@@ -35,5 +49,18 @@
     --elevation-7: rgba(255, 255, 255, 0.14);
     --elevation-8: rgba(255, 255, 255, 0.15);
     --elevation-9: rgba(255, 255, 255, 0.16);
+  }
+  .hero__text {
+    font-size: 7rem;
+  }
+  .hero__text--important {
+    font-weight: bold;
+    font-style: italic;
+    color: #bb86fc;
+  }
+  .hero__text--important:hover {
+    background-color: #bb86fc;
+    color: #000000;
+    font-style: normal;
   }
 }

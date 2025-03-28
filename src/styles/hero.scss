@@ -19,6 +19,22 @@
   --elevation-9: #{theme.t("light", "elevation-9")};
 }
 
+.hero {
+  &__text {
+    font-size: 7rem;
+    &--important {
+      font-weight: bold;
+      font-style: italic;
+      color: theme.t("light", "primary");
+      &:hover {
+        background-color: theme.t("light", "primary");
+        color: theme.t("light", "on-primary");
+        font-style: normal;
+      }
+    }
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   #hero__background {
     position: absolute;
@@ -37,5 +53,21 @@
     --elevation-7: #{theme.t("dark", "elevation-7")};
     --elevation-8: #{theme.t("dark", "elevation-8")};
     --elevation-9: #{theme.t("dark", "elevation-9")};
+  }
+
+  .hero {
+    &__text {
+      font-size: 7rem;
+      &--important {
+        font-weight: bold;
+        font-style: italic;
+        color: theme.t("dark", "primary");
+        &:hover {
+          background-color: theme.t("dark", "primary");
+          color: theme.t("dark", "on-primary");
+          font-style: normal;
+        }
+      }
+    }
   }
 }

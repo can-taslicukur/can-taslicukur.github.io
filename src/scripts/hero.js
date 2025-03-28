@@ -17,9 +17,9 @@ let mouse = {
   effectX: 0,
   effectY: 0,
 };
-canvas.addEventListener("mousemove", (e) => {
-  mouse.x = e.offsetX;
-  mouse.y = e.offsetY;
+document.addEventListener("mousemove", (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
 });
 
 let elevationColors = [];
