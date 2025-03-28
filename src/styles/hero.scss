@@ -1,13 +1,5 @@
 @use "./theme";
 
-#hero__background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  background-color: theme.t("background");
-}
-
 .hero {
   &__text {
     font-size: 7rem;

@@ -6,7 +6,7 @@ function rescale(x, min = -1, max = 1) {
 
 const asciiGradient = [" ", ".", ":", "|", "+", "*", "$", "#", "@"];
 
-const canvas = document.getElementById("hero__background");
+const canvas = document.getElementById("ascii-background");
 const ctx = canvas.getContext("2d");
 const noise = createNoise3D();
 let time = 0;

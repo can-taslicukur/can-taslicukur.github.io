@@ -1,0 +1,9 @@
+@use "./theme";
+
+#ascii-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: theme.t("background");
+}
