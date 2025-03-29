@@ -1,17 +1,58 @@
 @use "./theme";
 
 .hero {
-  &__text {
-    font-size: 7rem;
+  display: inline-block;
+  margin: 10%;
+  padding: 1rem;
+  font-size: 3rem;
+
+  &__title {
+    font-size: 2.5em;
     &--important {
       font-weight: bold;
       font-style: italic;
-      color: theme.t("primary");
+      text-decoration: none;
+      background-repeat: no-repeat;
+      background-size: 100% 0;
+      background-position: 0 101%;
+      background-image: linear-gradient(
+        to bottom,
+        theme.t("primary") 0%,
+        theme.t("primary") 100%
+      );
+      transition: color 0.3s ease, background-size 0.3s ease;
+
       &:hover {
-        background-color: theme.t("primary");
         color: theme.t("on-primary");
         font-style: normal;
+        background-image: linear-gradient(
+          to bottom,
+          theme.t("primary") 0%,
+          theme.t("primary") 100%
+        );
+        background-size: 100% 100%;
       }
     }
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.75em;
+
+    &--primary {
+      background-color: theme.t("primary");
+      color: theme.t("on-primary");
+    }
+    &--secondary {
+      background-color: theme.t("secondary");
+      color: theme.t("on-secondary");
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    font-size: 2rem;
   }
 }
