@@ -37,6 +37,11 @@ const Settings = {
         dark: (noise) =>
           `hsl(${14.25 - 60 + normalize(noise, -1, 1, [0, 60])}, 30%, 30%)`,
       },
+      {
+        light: (noise) =>
+          `hsl(${normalize(noise, -1, 1, [0, 360])}, 80%, 80.39%)`,
+        dark: (noise) => `hsl(${normalize(noise, -1, 1, [0, 360])}, 30%, 30%)`,
+      },
     ],
   },
   canvas: {
