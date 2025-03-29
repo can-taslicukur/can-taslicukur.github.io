@@ -7,22 +7,26 @@ const Settings = {
     fillStyleGenerators: [
       {
         light: (noise) => `rgba(0, 0, 0, 1)`,
-        dark: (noise) => `rgba(255, 255, 255, 0.16)`,
+        dark: (noise) => `rgba(255, 255, 255, 0.3)`,
       },
       {
-        light: (noise) => `hsl(${Math.floor(noise * 360)}, 100%, 50%)`,
-        dark: (noise) => `hsl(${Math.floor(noise * 360)}, 20%, 50%)`,
+        light: (noise) =>
+          `hsl(${199 + normalize(noise, -1, 1, [0, 60])}, 80.2%, 78.2%)`,
+        dark: (noise) =>
+          `hsl(${199 + normalize(noise, -1, 1, [0, 60])}, 80.2%, 78.2%)`,
       },
     ],
   },
   canvas: {
     elementId: "ascii-background",
-    cellSize: 25,
-    animationSpeed: 0.0006,
+    cellSize: 22,
+    animationSpeed: 0.001,
   },
   parallax: {
-    strength: 0.1,
-    easing: 0.1,
+    strength: 0.3,
+  },
+  mouseDistance: {
+    influence: 0.001,
   },
 };
 //#endregion
@@ -79,14 +83,12 @@ function resize() {
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const mouseNormalizedX = Mouse.x / canvas.width - 0.5;
-  const mouseNormalizedY = Mouse.y / canvas.height - 0.5;
+  const mouseNormalizedX = normalize(Mouse.x, 0, canvas.width, [-0.5, 0.5]);
+  const mouseNormalizedY = normalize(Mouse.y, 0, canvas.height, [-0.5, 0.5]);
   Mouse.parallaxX +=
-    (mouseNormalizedX * Settings.parallax.strength - Mouse.parallaxX) *
-    Settings.parallax.easing;
+    mouseNormalizedX * Settings.parallax.strength - Mouse.parallaxX;
   Mouse.parallaxY +=
-    (mouseNormalizedY * Settings.parallax.strength - Mouse.parallaxY) *
-    Settings.parallax.easing;
+    mouseNormalizedY * Settings.parallax.strength - Mouse.parallaxY;
 
   const rowCellSize = Math.floor(canvas.width / Settings.canvas.cellSize);
   const colCellSize = Math.floor(canvas.height / Settings.canvas.cellSize);
@@ -105,12 +107,11 @@ function render() {
         Math.hypot(canvas.width, canvas.height)
       );
 
-      let noiseValue = normalize(
-        canvasNoise(
-          normalize(x, 0, canvas.width) + Mouse.parallaxX,
-          normalize(y, 0, canvas.height) + Mouse.parallaxY,
-          time * Settings.canvas.animationSpeed + (1 - distToMouse) * 0.6
-        )
+      let noiseValue = canvasNoise(
+        normalize(x, 0, canvas.width) + Mouse.parallaxX,
+        normalize(y, 0, canvas.height) + Mouse.parallaxY,
+        time * Settings.canvas.animationSpeed -
+          Math.pow(Settings.mouseDistance.influence, distToMouse)
       );
 
       ctx.textAlign = "center";
@@ -122,7 +123,12 @@ function render() {
         ][theme](noiseValue);
       ctx.fillText(
         Settings.ascii.chars[
-          Math.floor(noiseValue * Settings.ascii.chars.length)
+          Math.min(
+            Math.floor(
+              normalize(noiseValue, -1, 1, [0, Settings.ascii.chars.length])
+            ),
+            Settings.ascii.chars.length - 1
+          )
         ],
         x,
         y
