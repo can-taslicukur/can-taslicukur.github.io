@@ -3,7 +3,7 @@ import { createNoise3D } from "simplex-noise";
 //#region Settings object for adjusting the behavior
 const Settings = {
   ascii: {
-    chars: " ·•*■█", // Pay attention to order, chars get more dense as index increases
+    chars: " ·•*■@█", // Pay attention to order, chars get more dense as index increases
     fillStyleGenerators: [
       {
         light: (noise) => `rgba(0, 0, 0, 1)`,
@@ -11,9 +11,31 @@ const Settings = {
       },
       {
         light: (noise) =>
-          `hsl(${199 + normalize(noise, -1, 1, [0, 60])}, 80.2%, 78.2%)`,
+          `hsl(${259 - 60 + normalize(noise, -1, 1, [0, 60])}, 80.2%, 78.2%)`,
         dark: (noise) =>
-          `hsl(${199 + normalize(noise, -1, 1, [0, 60])}, 80.2%, 78.2%)`,
+          `hsl(${259 - 60 + normalize(noise, -1, 1, [0, 60])}, 30%, 30%)`,
+      },
+      {
+        light: (noise) =>
+          `hsl(${
+            177.75 - 60 + normalize(noise, -1, 1, [0, 60])
+          }, 47.06%, 66.67%)`,
+        dark: (noise) =>
+          `hsl(${177.75 - 60 + normalize(noise, -1, 1, [0, 60])}, 30%, 30%)`,
+      },
+      {
+        light: (noise) =>
+          `hsl(${
+            52.56 - 60 + normalize(noise, -1, 1, [0, 60])
+          }, 82.17%, 69.22%)`,
+        dark: (noise) =>
+          `hsl(${52.56 - 60 + normalize(noise, -1, 1, [0, 60])}, 30%, 30%)`,
+      },
+      {
+        light: (noise) =>
+          `hsl(${14.25 - 60 + normalize(noise, -1, 1, [0, 60])}, 80%, 80.39%)`,
+        dark: (noise) =>
+          `hsl(${14.25 - 60 + normalize(noise, -1, 1, [0, 60])}, 30%, 30%)`,
       },
     ],
   },
