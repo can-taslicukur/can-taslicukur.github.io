@@ -70,8 +70,14 @@ document.addEventListener("mousemove", (e) => {
   Mouse.x = e.clientX;
   Mouse.y = e.clientY;
 });
-canvas.addEventListener("click", (e) => {
-  Mouse.canvasClick++;
+document.addEventListener("click", (e) => {
+  if (
+    e.target === canvas ||
+    e.target === document.body ||
+    e.target === document.documentElement
+  ) {
+    Mouse.canvasClick++;
+  }
 });
 //#endregion
 
