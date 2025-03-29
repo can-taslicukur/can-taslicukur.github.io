@@ -1,70 +1,95 @@
 import { createNoise3D } from "simplex-noise";
 
-function rescale(x, min = -1, max = 1) {
-  return (x - min) / (max - min);
-}
+//#region Settings object for adjusting the behavior
+const Settings = {
+  ascii: {
+    chars: " ·•*■█", // Pay attention to order, chars get more dense as index increases
+    fillStyleGenerators: [
+      {
+        light: (noise) => `rgba(0, 0, 0, 1)`,
+        dark: (noise) => `rgba(255, 255, 255, 0.16)`,
+      },
+      {
+        light: (noise) => `hsl(${Math.floor(noise * 360)}, 100%, 50%)`,
+        dark: (noise) => `hsl(${Math.floor(noise * 360)}, 20%, 50%)`,
+      },
+    ],
+  },
+  canvas: {
+    elementId: "ascii-background",
+    cellSize: 25,
+    animationSpeed: 0.0006,
+  },
+  parallax: {
+    strength: 0.1,
+    easing: 0.1,
+  },
+};
+//#endregion
 
-const asciiGradient = [" ", ".", ":", "|", "+", "*", "$", "#", "@"];
-
-const canvas = document.getElementById("ascii-background");
-const ctx = canvas.getContext("2d");
-const noise = createNoise3D();
+const canvasNoise = createNoise3D();
 let time = 0;
+const canvas = document.getElementById(Settings.canvas.elementId);
+const ctx = canvas.getContext("2d");
 
-let mouse = {
+//#region Mouse object and mouse event listeners for updating its attributes
+let Mouse = {
   x: canvas.width / 2,
   y: canvas.height / 2,
-  effectX: 0,
-  effectY: 0,
+  parallaxX: 0,
+  parallaxY: 0,
+  canvasClick: Settings.ascii.fillStyleGenerators.length,
 };
 document.addEventListener("mousemove", (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
+  Mouse.x = e.clientX;
+  Mouse.y = e.clientY;
 });
+canvas.addEventListener("click", (e) => {
+  Mouse.canvasClick++;
+});
+//#endregion
 
-let elevationColors = [];
-function updateElevationColors() {
-  elevationColors = [...Array(10).keys()].map((_, i) =>
-    getComputedStyle(document.documentElement).getPropertyValue(
-      `--elevation-${i}`
-    )
-  );
-}
-updateElevationColors();
+//#region Light-Dark mode theming
 const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
 let theme = colorScheme.matches ? "dark" : "light";
 colorScheme.addEventListener("change", (e) => {
-  updateElevationColors();
   theme = e.matches ? "dark" : "light";
-  noiseSmoothing =
-    (theme === "dark" ? 1 : -1) * Math.abs(1 - noiseSmoothing) + 1;
 });
+//#endregion
+
+resize();
+addEventListener("resize", resize);
+render();
+
+//#region functions
+function normalize(x, xmin = -1, xmax = 1, targetRange = [0, 1]) {
+  return (
+    ((x - xmin) / (xmax - xmin)) * (targetRange[1] - targetRange[0]) +
+    targetRange[0]
+  );
+}
 
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  mouse.x = canvas.width / 2;
-  mouse.y = canvas.height / 2;
+  Mouse.x = canvas.width / 2;
+  Mouse.y = canvas.height / 2;
 }
-
-const cellSize = 15;
-const timeSpeed = 0.0003;
-let noiseSmoothing = (theme === "dark" ? 1 : -1) * 0.3 + 1;
-const parallaxStrength = 0.1;
-const easing = 0.1;
 
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const mouseNormalizedX = mouse.x / canvas.width - 0.5;
-  const mouseNormalizedY = mouse.y / canvas.height - 0.5;
-  mouse.effectX +=
-    (mouseNormalizedX * parallaxStrength - mouse.effectX) * easing;
-  mouse.effectY +=
-    (mouseNormalizedY * parallaxStrength - mouse.effectY) * easing;
+  const mouseNormalizedX = Mouse.x / canvas.width - 0.5;
+  const mouseNormalizedY = Mouse.y / canvas.height - 0.5;
+  Mouse.parallaxX +=
+    (mouseNormalizedX * Settings.parallax.strength - Mouse.parallaxX) *
+    Settings.parallax.easing;
+  Mouse.parallaxY +=
+    (mouseNormalizedY * Settings.parallax.strength - Mouse.parallaxY) *
+    Settings.parallax.easing;
 
-  const rowCellSize = Math.floor(canvas.width / cellSize);
-  const colCellSize = Math.floor(canvas.height / cellSize);
+  const rowCellSize = Math.floor(canvas.width / Settings.canvas.cellSize);
+  const colCellSize = Math.floor(canvas.height / Settings.canvas.cellSize);
 
   const cellWidth = canvas.width / rowCellSize;
   const cellHeight = canvas.height / colCellSize;
@@ -74,24 +99,31 @@ function render() {
     for (let col = 0; col < colCellSize; col++) {
       const y = col * cellHeight + cellHeight / 2;
 
-      let noiseValue = Math.pow(
-        rescale(
-          noise(
-            rescale(x, 0, canvas.width) + mouse.effectX,
-            rescale(y, 0, canvas.height) + mouse.effectY,
-            time * timeSpeed
-          )
-        ),
-        noiseSmoothing
+      const distToMouse = normalize(
+        Math.hypot(x - Mouse.x, y - Mouse.y),
+        0,
+        Math.hypot(canvas.width, canvas.height)
+      );
+
+      let noiseValue = normalize(
+        canvasNoise(
+          normalize(x, 0, canvas.width) + Mouse.parallaxX,
+          normalize(y, 0, canvas.height) + Mouse.parallaxY,
+          time * Settings.canvas.animationSpeed + (1 - distToMouse) * 0.6
+        )
       );
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.font = `40px Monaspace Neon`;
+      ctx.font = `1rem Monaspace Neon`;
       ctx.fillStyle =
-        elevationColors[Math.floor(noiseValue * (elevationColors.length - 1))];
+        Settings.ascii.fillStyleGenerators[
+          Mouse.canvasClick % Settings.ascii.fillStyleGenerators.length
+        ][theme](noiseValue);
       ctx.fillText(
-        asciiGradient[Math.floor(noiseValue * asciiGradient.length - 1)],
+        Settings.ascii.chars[
+          Math.floor(noiseValue * Settings.ascii.chars.length)
+        ],
         x,
         y
       );
@@ -101,8 +133,4 @@ function render() {
 
   requestAnimationFrame(render);
 }
-
-resize();
-addEventListener("resize", resize);
-
-render();
+//#endregion
