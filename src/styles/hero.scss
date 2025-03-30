@@ -40,11 +40,12 @@
     justify-content: flex-end;
     font-size: 0.75em;
 
-    &--primary {
+    .primary {
       background-color: theme.t("primary");
       color: theme.t("on-primary");
     }
-    &--secondary {
+
+    .secondary {
       background-color: theme.t("secondary");
       color: theme.t("on-secondary");
     }

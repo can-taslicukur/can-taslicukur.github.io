@@ -70,6 +70,7 @@ let Mouse = {
   parallaxX: 0,
   parallaxY: 0,
   canvasClick: Settings.ascii.fillStyleGenerators.length,
+  mouseDistanceInfluenceModifier: 1,
 };
 document.addEventListener("mousemove", (e) => {
   Mouse.x = e.clientX;
@@ -83,6 +84,12 @@ document.addEventListener("click", (e) => {
   ) {
     Mouse.canvasClick++;
   }
+});
+document.querySelector(".primary").addEventListener("mouseenter", (e) => {
+  Mouse.mouseDistanceInfluenceModifier = -1;
+});
+document.querySelector(".primary").addEventListener("mouseleave", (e) => {
+  Mouse.mouseDistanceInfluenceModifier = 1;
 });
 //#endregion
 
@@ -144,7 +151,13 @@ function render() {
         normalize(x, 0, canvas.width) + Mouse.parallaxX,
         normalize(y, 0, canvas.height) + Mouse.parallaxY,
         time * Settings.canvas.animationSpeed -
-          Math.pow(Settings.mouseDistance.influence, distToMouse)
+          Math.pow(
+            Math.pow(
+              Settings.mouseDistance.influence,
+              Mouse.mouseDistanceInfluenceModifier
+            ),
+            distToMouse
+          )
       );
 
       ctx.textAlign = "center";
