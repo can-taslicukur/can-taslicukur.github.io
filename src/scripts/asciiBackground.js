@@ -80,6 +80,7 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("click", (e) => {
   if (
     e.target === canvas ||
+    !["A", "P", "H1"].includes(e.target.tagName) ||
     e.target === document.body ||
     e.target === document.documentElement
   ) {
@@ -119,8 +120,8 @@ function normalize(x, xmin = -1, xmax = 1, targetRange = [0, 1]) {
 }
 
 function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
   Mouse.x = canvas.width / 2;
   Mouse.y = canvas.height / 2;
 }
