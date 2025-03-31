@@ -54,6 +54,7 @@ const Settings = {
   },
   mouseDistance: {
     influence: 0.001,
+    invertInfluenceSelector: "#hero-cta-primary",
   },
 };
 //#endregion
@@ -85,12 +86,16 @@ document.addEventListener("click", (e) => {
     Mouse.canvasClick++;
   }
 });
-document.querySelector(".primary").addEventListener("mouseenter", (e) => {
-  Mouse.mouseDistanceInfluenceModifier = -1;
-});
-document.querySelector(".primary").addEventListener("mouseleave", (e) => {
-  Mouse.mouseDistanceInfluenceModifier = 1;
-});
+document
+  .querySelector(Settings.mouseDistance.invertInfluenceSelector)
+  .addEventListener("mouseenter", (e) => {
+    Mouse.mouseDistanceInfluenceModifier = -1;
+  });
+document
+  .querySelector(Settings.mouseDistance.invertInfluenceSelector)
+  .addEventListener("mouseleave", (e) => {
+    Mouse.mouseDistanceInfluenceModifier = 1;
+  });
 //#endregion
 
 //#region Light-Dark mode theming

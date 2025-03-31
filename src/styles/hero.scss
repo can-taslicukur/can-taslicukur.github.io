@@ -2,7 +2,7 @@
 
 .hero {
   display: inline-block;
-  margin: 10%;
+  margin: 7%;
   padding: 1rem;
   font-size: 3rem;
 
@@ -39,20 +39,25 @@
     display: flex;
     justify-content: flex-end;
     font-size: 0.75em;
+    gap: 2em;
 
-    .primary {
+    &--primary {
+      border: none;
       background-color: theme.t("primary");
       color: theme.t("on-primary");
+      padding: 0.5em;
     }
 
-    .secondary {
+    &--secondary {
+      border: none;
       background-color: theme.t("secondary");
       color: theme.t("on-secondary");
+      padding: 0.5em;
     }
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .hero {
     font-size: 2rem;
   }
