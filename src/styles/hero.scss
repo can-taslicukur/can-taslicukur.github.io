@@ -6,7 +6,9 @@
 
 .hero {
   display: inline-block;
-  margin: 7%;
+  position: absolute;
+  top: 25%;
+  left: 10%;
   padding: 1rem;
   font-size: 3rem;
 
@@ -47,7 +49,7 @@
   &__cta {
     display: flex;
     justify-content: flex-end;
-    font-size: 0.75em;
+    font-size: 0.5em;
     gap: 2em;
 
     &--primary {
@@ -69,5 +71,7 @@
 @media screen and (max-width: 1080px) {
   .hero {
     font-size: 2rem;
+    top: 5%;
+    left: 1%;
   }
 }
