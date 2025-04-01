@@ -6,7 +6,7 @@ const Settings = {
     chars: " ·•*■@█", // Pay attention to order, chars get more dense as index increases
     fillStyleGenerators: [
       {
-        light: (noise) => `rgba(0,0,0,0.4)`,
+        light: (noise) => `rgba(0,0,0,0.3)`,
         dark: (noise) => `rgba(255, 255, 255, 0.3)`,
       },
       {
