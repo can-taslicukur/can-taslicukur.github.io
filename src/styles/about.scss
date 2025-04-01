@@ -1,9 +1,16 @@
+@use "./theme";
+
 #about {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .about {
-  &__intro {
-    text-align: center;
-  }
+  padding: 1% 10%;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  text-align: center;
 }
