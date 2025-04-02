@@ -33,10 +33,9 @@ import AsciiBackground from "./AsciiBackground.astro";
   </a>
 </section>
 <script>
-  let hasScrolledAlready = false;
   document.addEventListener("scroll", () => {
-    if (window.scrollY / window.innerHeight > 0.25 || hasScrolledAlready) {
-      hasScrolledAlready = true;
+    const scrollYnormalized = window.scrollY / window.innerHeight;
+    if (scrollYnormalized > 0.4) {
       document
         .querySelector(".hero__scrolldown")
         ?.classList.add("hero__scrolldown--hidden");
