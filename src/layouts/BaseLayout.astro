@@ -17,25 +17,27 @@ const { title } = Astro.props;
     <style lang="scss"></style>
     <title>{title}</title>
   </head>
-  <body><slot /> </body>
-  <footer>
-    <IconLink
-      icon="linkedin"
-      href="https://www.linkedin.com/in/cantaslicukur/"
-      width="3rem"
-      height="3rem"
-    />
-    <IconLink
-      icon="github"
-      href="https://github.com/can-taslicukur/"
-      width="3rem"
-      height="3rem"
-    />
-    <IconLink
-      icon="email"
-      href="mailto:ege.can.taslicukur@gmail.com"
-      width="3rem"
-      height="3rem"
-    />
-  </footer>
+  <body>
+    <slot />
+    <footer>
+      <IconLink
+        icon="linkedin"
+        href="https://www.linkedin.com/in/cantaslicukur/"
+        width="3rem"
+        height="3rem"
+      />
+      <IconLink
+        icon="github"
+        href="https://github.com/can-taslicukur/"
+        width="3rem"
+        height="3rem"
+      />
+      <IconLink
+        icon="email"
+        href="mailto:ege.can.taslicukur@gmail.com"
+        width="3rem"
+        height="3rem"
+      />
+    </footer>
+  </body>
 </html>
