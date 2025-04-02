@@ -60,19 +60,19 @@ $cards-gap: 2rem;
       align-items: center;
       padding: 0;
       gap: $marquee-gap;
+      animation: marquee 20s linear infinite;
+      animation-play-state: paused;
       @media (max-width: 1080px) {
         gap: $marquee-gap-mobile;
       }
-      animation: marquee 20s linear infinite;
-      animation-play-state: paused;
 
       &__item {
         font-size: 3rem;
+        font-weight: bold;
+        text-wrap: nowrap;
         @media (max-width: 1080px) {
           font-size: 1.5rem;
         }
-        font-weight: bold;
-        text-wrap: nowrap;
       }
     }
   }
@@ -86,14 +86,14 @@ $cards-gap: 2rem;
     &__card {
       padding: 1rem;
       width: calc(100% / 3 - 3 * $cards-gap);
-      @media (max-width: 1080px) {
-        width: 100%;
-        margin-bottom: 1rem;
-      }
       backdrop-filter: blur($blur-amount);
       border-radius: 1rem;
       border: 0.3rem solid theme.t("elevation-1");
       backdrop-filter: blur($blur-amount);
+      @media (max-width: 1080px) {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
 
       &:hover {
         background: linear-gradient(
