@@ -1,7 +1,8 @@
 @use "./theme";
 
-$vertical-spacing: 2rem;
+$vertical-spacing: 5rem;
 $marquee-gap: 3rem;
+$marquee-gap-mobile: 1rem;
 $blur-amount: 10px;
 $cards-gap: 2rem;
 
@@ -27,6 +28,10 @@ $cards-gap: 2rem;
 }
 
 .about__projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
   &__marquee {
     backdrop-filter: blur($blur-amount);
     transition: 0.3s linear;
@@ -34,6 +39,9 @@ $cards-gap: 2rem;
     user-select: none;
     display: flex;
     gap: $marquee-gap;
+    @media (max-width: 1080px) {
+      gap: $marquee-gap-mobile;
+    }
 
     &:hover {
       background-color: theme.t("background");
@@ -49,15 +57,20 @@ $cards-gap: 2rem;
       flex-shrink: 0;
       min-width: 100%;
       display: flex;
-      // justify-content: space-between;
       align-items: center;
       padding: 0;
       gap: $marquee-gap;
+      @media (max-width: 1080px) {
+        gap: $marquee-gap-mobile;
+      }
       animation: marquee 20s linear infinite;
       animation-play-state: paused;
 
       &__item {
         font-size: 3rem;
+        @media (max-width: 1080px) {
+          font-size: 1.5rem;
+        }
         font-weight: bold;
         text-wrap: nowrap;
       }
@@ -72,12 +85,14 @@ $cards-gap: 2rem;
 
     &__card {
       padding: 1rem;
-      max-width: calc(
-        100% / 3 - 3 * $cards-gap
-      ); // 3 cards per row with 2rem gap
+      width: calc(100% / 3 - 3 * $cards-gap);
+      @media (max-width: 1080px) {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
       backdrop-filter: blur($blur-amount);
       border-radius: 1rem;
-      border: 0.3rem solid rgba(0, 0, 0, 0);
+      border: 0.3rem solid theme.t("elevation-1");
       backdrop-filter: blur($blur-amount);
 
       &:hover {
@@ -94,9 +109,25 @@ $cards-gap: 2rem;
             border-box;
         animation: 7s rotate linear infinite;
       }
-      @media (max-width: 1080px) {
-        max-width: 100%;
-        margin-bottom: 1rem;
+
+      &__subtitle {
+        position: relative;
+        top: -1rem;
+        font-size: 0.75rem;
+        margin: 0;
+      }
+
+      &__description {
+        height: 5rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      &__links {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
       }
     }
   }
@@ -117,5 +148,12 @@ $cards-gap: 2rem;
 @keyframes marquee {
   to {
     transform: translateX(calc(-100% - $marquee-gap));
+  }
+}
+@media (max-width: 1080px) {
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-100% - $marquee-gap-mobile));
+    }
   }
 }

@@ -1,5 +1,6 @@
 ---
 import "../styles/about.scss";
+import IconLink from "./IconLink.astro";
 ---
 
 <section id="about">
@@ -60,61 +61,82 @@ import "../styles/about.scss";
         <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
       </ul>
     </div>
-  </div>
-  <div class="about__projects__cards">
-    <div class="about__projects__cards__card">
-      <h1>PROJECT TITLE</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, saepe
-        rem voluptatum excepturi, repellat itaque a corporis porro vero
-        molestiae possimus reiciendis tempore totam quos doloremque ipsam
-        delectus? Dolor, hic.
-      </p>
-    </div>
-    <div class="about__projects__cards__card">
-      <h1>PROJECT TITLE</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, saepe
-        rem voluptatum excepturi, repellat itaque a corporis porro vero
-        molestiae possimus reiciendis tempore totam quos doloremque ipsam
-        delectus? Dolor, hic.
-      </p>
-    </div>
-    <div class="about__projects__cards__card">
-      <h1>PROJECT TITLE</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, saepe
-        rem voluptatum excepturi, repellat itaque a corporis porro vero
-        molestiae possimus reiciendis tempore totam quos doloremque ipsam
-        delectus? Dolor, hic.
-      </p>
-    </div>
-    <div class="about__projects__cards__card">
-      <h1>PROJECT TITLE</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, saepe
-        rem voluptatum excepturi, repellat itaque a corporis porro vero
-        molestiae possimus reiciendis tempore totam quos doloremque ipsam
-        delectus? Dolor, hic.
-      </p>
-    </div>
-    <div class="about__projects__cards__card">
-      <h1>PROJECT TITLE</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, saepe
-        rem voluptatum excepturi, repellat itaque a corporis porro vero
-        molestiae possimus reiciendis tempore totam quos doloremque ipsam
-        delectus? Dolor, hic.
-      </p>
-    </div>
-    <div class="about__projects__cards__card">
-      <h1>PROJECT TITLE</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, saepe
-        rem voluptatum excepturi, repellat itaque a corporis porro vero
-        molestiae possimus reiciendis tempore totam quos doloremque ipsam
-        delectus? Dolor, hic.
-      </p>
+    <div class="about__projects__cards">
+      <div class="about__projects__cards__card">
+        <h1 class="about__projects__cards__card__title">gait</h1>
+        <p class="about__projects__cards__card__subtitle">Side project</p>
+        <p class="about__projects__cards__card__description">
+          CLI tool for reviewing code using LLMs. Built with Python's Typer
+          library and OpenAI API.
+        </p>
+        <div class="about__projects__cards__card__links">
+          <IconLink
+            icon="github"
+            href="https://github.com/can-taslicukur/gait"
+            width="2rem"
+            height="2rem"
+          />
+        </div>
+      </div>
+      <div class="about__projects__cards__card">
+        <h1 class="about__projects__cards__card__title">
+          Health Equity Explorer
+        </h1>
+        <p class="about__projects__cards__card__subtitle">BMC - Appsilon</p>
+        <p class="about__projects__cards__card__description">
+          Shiny application designed to enable users to explore health equity
+          data in a way that can be easily shared across common data models.
+        </p>
+        <div class="about__projects__cards__card__links">
+          <IconLink
+            icon="seminar"
+            href="https://youtu.be/bOuCisfRqdg?si=7HOvNIP3GQhbknui"
+            width="2rem"
+            height="2rem"
+          />
+          <IconLink
+            icon="paper"
+            href="https://pubmed.ncbi.nlm.nih.gov/38690224/"
+            width="2rem"
+            height="2rem"
+          />
+        </div>
+      </div>
+      <div class="about__projects__cards__card">
+        <h1 class="about__projects__cards__card__title">tefasr</h1>
+        <p class="about__projects__cards__card__subtitle">Side Project</p>
+        <p class="about__projects__cards__card__description">
+          R package for getting historical data of public investment funds in
+          Turkey.
+        </p>
+        <div class="about__projects__cards__card__links">
+          <IconLink
+            icon="github"
+            href="https://github.com/can-taslicukur/tefasr"
+            width="2rem"
+            height="2rem"
+          />
+        </div>
+      </div>
+      <div class="about__projects__cards__card">
+        <h1 class="about__projects__cards__card__title">deepOCEAN</h1>
+        <p class="about__projects__cards__card__subtitle">24Saatteis</p>
+        <p class="about__projects__cards__card__description">
+          Multimodal Convolutional Neural Network for Big Five (OCEAN)
+          personality trait prediction from video interviews.
+        </p>
+        <div class="about__projects__cards__card__links"></div>
+      </div>
+      <div class="about__projects__cards__card">
+        <h1 class="about__projects__cards__card__title">ISCO Similarity</h1>
+        <p class="about__projects__cards__card__subtitle">24Saatteis</p>
+        <p class="about__projects__cards__card__description">
+          Job similarity engine using vector space modeling and cosine
+          similarity to cluster ISCO job titles based on real-world career
+          transition patterns.
+        </p>
+        <div class="about__projects__cards__card__links"></div>
+      </div>
     </div>
   </div>
 </section>
