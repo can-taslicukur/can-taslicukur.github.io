@@ -3,6 +3,7 @@
 $vertical-spacing: 2rem;
 $marquee-gap: 3rem;
 $blur-amount: 10px;
+$cards-gap: 2rem;
 
 #about {
   min-height: 100vh;
@@ -27,7 +28,6 @@ $blur-amount: 10px;
 
 .about__projects {
   &__marquee {
-    margin: $vertical-spacing auto;
     backdrop-filter: blur($blur-amount);
     transition: 0.3s linear;
     overflow: hidden;
@@ -40,7 +40,7 @@ $blur-amount: 10px;
       outline: solid theme.t("on-background") 0.3rem;
 
       .about__projects__marquee__content {
-        animation-play-state: paused;
+        animation-play-state: running;
       }
     }
 
@@ -53,7 +53,8 @@ $blur-amount: 10px;
       align-items: center;
       padding: 0;
       gap: $marquee-gap;
-      animation: marquee 30s linear infinite;
+      animation: marquee 20s linear infinite;
+      animation-play-state: paused;
 
       &__item {
         font-size: 3rem;
@@ -67,11 +68,13 @@ $blur-amount: 10px;
     padding: 1% 10%;
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: $cards-gap;
 
     &__card {
       padding: 1rem;
-      max-width: calc(33% - 2rem); // 3 cards per row with 2rem gap
+      max-width: calc(
+        100% / 3 - 3 * $cards-gap
+      ); // 3 cards per row with 2rem gap
       backdrop-filter: blur($blur-amount);
       border-radius: 1rem;
       border: 0.3rem solid rgba(0, 0, 0, 0);
@@ -89,7 +92,7 @@ $blur-amount: 10px;
               theme.t("on-background")
             )
             border-box;
-        animation: 8s rotate linear infinite;
+        animation: 7s rotate linear infinite;
       }
       @media (max-width: 1080px) {
         max-width: 100%;
