@@ -3,10 +3,10 @@ import { createNoise3D } from "simplex-noise";
 //#region Settings object for adjusting the behavior
 const Settings = {
   ascii: {
-    chars: " ·•*■@█", // Pay attention to order, chars get more dense as index increases
+    chars: " .*@", // Pay attention to order, chars get more dense as index increases
     fillStyleGenerators: [
       {
-        light: (noise) => `rgba(0,0,0,0.3)`,
+        light: (noise) => `rgba(0,0,0,0.8)`,
         dark: (noise) => `rgba(255, 255, 255, 0.3)`,
       },
       {
