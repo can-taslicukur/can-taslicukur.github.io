@@ -18,4 +18,32 @@ import AsciiBackground from "./AsciiBackground.astro";
       <a id="hero-cta-primary" class="hero__cta--primary">BLOG COMING SOON</a>
     </div>
   </div>
+  <a href="#about" class="hero__scrolldown"
+    ><svg
+      height="3em"
+      viewBox="0 0 24 24"
+      width="3em"
+      xmlns="http://www.w3.org/2000/svg"
+      style="fill: currentColor;"
+    >
+      <path
+        d="m7.41 14.58 4.59 4.59 4.59-4.59 1.41 1.42-6 6-6-6zm0-6 4.59 4.59 4.59-4.59 1.41 1.42-6 6-6-6zm0-6 4.59 4.59 4.59-4.59 1.41 1.42-6 6-6-6z"
+      ></path>
+    </svg>
+  </a>
 </section>
+<script>
+  let hasScrolledAlready = false;
+  document.addEventListener("scroll", () => {
+    if (window.scrollY / window.innerHeight > 0.25 || hasScrolledAlready) {
+      hasScrolledAlready = true;
+      document
+        .querySelector(".hero__scrolldown")
+        ?.classList.add("hero__scrolldown--hidden");
+    } else {
+      document
+        .querySelector(".hero__scrolldown")
+        ?.classList.remove("hero__scrolldown--hidden");
+    }
+  });
+</script>

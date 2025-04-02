@@ -2,6 +2,7 @@
 
 #hero {
   height: 100vh;
+  position: relative;
 }
 
 .hero {
@@ -66,12 +67,42 @@
       padding: 0.5em;
     }
   }
+
+  &__scrolldown {
+    position: absolute;
+    top: calc(95% - 3em);
+    left: 50%;
+    color: theme.t("on-background");
+    animation: scrollDownAnimation 2s ease-in-out infinite;
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
 }
 
-@media screen and (max-width: 1080px) {
+@keyframes scrollDownAnimation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1em);
+  }
+}
+
+@media only screen and (max-width: 650px) {
   .hero {
     font-size: 2rem;
     top: 5%;
+    left: 1%;
+  }
+}
+
+@media only screen and (max-width: 1080px) and (min-width: 651px) {
+  .hero {
+    font-size: 3rem;
+    top: 7%;
     left: 1%;
   }
 }
