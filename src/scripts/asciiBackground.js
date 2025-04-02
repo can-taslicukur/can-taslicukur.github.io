@@ -80,7 +80,14 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("click", (e) => {
   if (
     e.target === canvas ||
-    !["A", "P", "H1"].includes(e.target.tagName) ||
+    (!["A", "P", "H1"].includes(e.target.tagName) &&
+      ![
+        "about__projects__cards__card",
+        "about__bio",
+        "about__projects__marquee",
+        "about__projects__marquee__content",
+        "about__projects__marquee__content__item",
+      ].includes(e.target.className)) ||
     e.target === document.body ||
     e.target === document.documentElement
   ) {

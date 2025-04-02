@@ -1,16 +1,118 @@
 @use "./theme";
 
+$vertical-spacing: 2rem;
+$marquee-gap: 3rem;
+$blur-amount: 10px;
+
 #about {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: $vertical-spacing;
 }
 
-.about {
+.about__bio {
   padding: 1% 10%;
-  backdrop-filter: blur(10px);
   overflow: hidden;
   text-align: center;
+  backdrop-filter: blur($blur-amount);
+  transition: 0.3s linear;
+
+  &:hover {
+    background-color: theme.t("background");
+    outline: solid theme.t("on-background") 0.3rem;
+  }
+}
+
+.about__projects {
+  &__marquee {
+    margin: $vertical-spacing auto;
+    backdrop-filter: blur($blur-amount);
+    transition: 0.3s linear;
+    overflow: hidden;
+    user-select: none;
+    display: flex;
+    gap: $marquee-gap;
+
+    &:hover {
+      background-color: theme.t("background");
+      outline: solid theme.t("on-background") 0.3rem;
+
+      .about__projects__marquee__content {
+        animation-play-state: paused;
+      }
+    }
+
+    &__content {
+      list-style: none;
+      flex-shrink: 0;
+      min-width: 100%;
+      display: flex;
+      // justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      gap: $marquee-gap;
+      animation: marquee 30s linear infinite;
+
+      &__item {
+        font-size: 3rem;
+        font-weight: bold;
+        text-wrap: nowrap;
+      }
+    }
+  }
+
+  &__cards {
+    padding: 1% 10%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    &__card {
+      padding: 1rem;
+      max-width: calc(33% - 2rem); // 3 cards per row with 2rem gap
+      backdrop-filter: blur($blur-amount);
+      border-radius: 1rem;
+      border: 0.3rem solid rgba(0, 0, 0, 0);
+      backdrop-filter: blur($blur-amount);
+
+      &:hover {
+        background: linear-gradient(
+              theme.t("background"),
+              theme.t("background")
+            )
+            padding-box,
+          linear-gradient(
+              var(--angle),
+              theme.t("background"),
+              theme.t("on-background")
+            )
+            border-box;
+        animation: 8s rotate linear infinite;
+      }
+      @media (max-width: 1080px) {
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-100% - $marquee-gap));
+  }
 }
