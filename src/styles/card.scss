@@ -1,0 +1,58 @@
+@use "./theme";
+
+.card {
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 0.3rem solid theme.t("elevation-1");
+  backdrop-filter: blur(10px);
+  @media (max-width: 1080px) {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  &:hover {
+    background: linear-gradient(theme.t("background"), theme.t("background"))
+        padding-box,
+      linear-gradient(
+          var(--angle),
+          theme.t("background"),
+          theme.t("on-background")
+        )
+        border-box;
+    animation: 7s rotate linear infinite;
+  }
+
+  &__subtitle {
+    position: relative;
+    top: -1rem;
+    font-size: 0.75rem;
+    margin: 0;
+  }
+
+  &__description {
+    height: 5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    min-height: 2rem;
+  }
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}

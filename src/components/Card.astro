@@ -1,0 +1,33 @@
+---
+import "../styles/card.scss";
+import IconLink from "./IconLink.astro";
+
+interface Link {
+  icon: string;
+
+  href: string;
+}
+
+const { title, subtitle, description, width, links } = Astro.props as {
+  title: string;
+
+  subtitle: string;
+
+  description: string;
+
+  width: string;
+
+  links: Link[];
+};
+---
+
+<div class="card" style={`width: ${width};`}>
+  <h1 class="card__title">{title}</h1>
+  <p class="card__subtitle">{subtitle}</p>
+  <p class="card__description">
+    {description}
+  </p>
+  <div class="card__links">
+    {links.map(({ icon, href }) => <IconLink icon={icon} href={href} />)}
+  </div>
+</div>

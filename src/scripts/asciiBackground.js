@@ -82,7 +82,7 @@ document.addEventListener("click", (e) => {
     e.target === canvas ||
     (!["A", "P", "H1", "path", "FOOTER", "svg"].includes(e.target.tagName) &&
       ![
-        "about__projects__cards__card",
+        "card",
         "about__bio",
         "marquee",
         "marquee__content",

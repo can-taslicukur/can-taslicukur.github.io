@@ -1,22 +1,18 @@
 @use "./theme";
 
-$vertical-spacing: 5rem;
-$blur-amount: 10px;
-$cards-gap: 2rem;
-
 #about {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: $vertical-spacing;
+  gap: 5rem;
 }
 
 .about__bio {
   padding: 1% 10%;
   overflow: hidden;
   text-align: center;
-  backdrop-filter: blur($blur-amount);
+  backdrop-filter: blur(10px);
   transition: 0.3s linear;
 
   &:hover {
@@ -34,67 +30,6 @@ $cards-gap: 2rem;
     padding: 1% 10%;
     display: flex;
     flex-wrap: wrap;
-    gap: $cards-gap;
-
-    &__card {
-      padding: 1rem;
-      width: calc(100% / 3 - 3 * $cards-gap);
-      backdrop-filter: blur($blur-amount);
-      border-radius: 1rem;
-      border: 0.3rem solid theme.t("elevation-1");
-      backdrop-filter: blur($blur-amount);
-      @media (max-width: 1080px) {
-        width: 100%;
-        margin-bottom: 1rem;
-      }
-
-      &:hover {
-        background: linear-gradient(
-              theme.t("background"),
-              theme.t("background")
-            )
-            padding-box,
-          linear-gradient(
-              var(--angle),
-              theme.t("background"),
-              theme.t("on-background")
-            )
-            border-box;
-        animation: 7s rotate linear infinite;
-      }
-
-      &__subtitle {
-        position: relative;
-        top: -1rem;
-        font-size: 0.75rem;
-        margin: 0;
-      }
-
-      &__description {
-        height: 5rem;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      &__links {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 1rem;
-        min-height: 2rem;
-      }
-    }
+    gap: 2rem;
   }
-}
-
-@keyframes rotate {
-  to {
-    --angle: 360deg;
-  }
-}
-
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
 }
