@@ -33,16 +33,23 @@ import AsciiBackground from "./AsciiBackground.astro";
   </a>
 </section>
 <script>
+  const scrolldownIcon = document.querySelector(
+    ".hero__scrolldown"
+  ) as HTMLAnchorElement;
   document.addEventListener("scroll", () => {
-    const scrollYnormalized = window.scrollY / window.innerHeight;
-    if (scrollYnormalized > 0.4) {
-      document
-        .querySelector(".hero__scrolldown")
-        ?.classList.add("hero__scrolldown--hidden");
-    } else {
-      document
-        .querySelector(".hero__scrolldown")
-        ?.classList.remove("hero__scrolldown--hidden");
+    if (!scrolldownIcon) {
+      return;
     }
+    const scrollYnormalized = window.scrollY / window.innerHeight;
+
+    const newOpacity = Math.max(0, 1 - scrollYnormalized * 1.5);
+
+    if (newOpacity == 0) {
+      scrolldownIcon.classList.add("hero__scrolldown--hidden");
+      return;
+    }
+
+    scrolldownIcon.classList.remove("hero__scrolldown--hidden");
+    scrolldownIcon.style.opacity = String(Math.max(0, 1 - scrollYnormalized));
   });
 </script>
