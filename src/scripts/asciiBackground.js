@@ -84,9 +84,9 @@ document.addEventListener("click", (e) => {
       ![
         "about__projects__cards__card",
         "about__bio",
-        "about__projects__marquee",
-        "about__projects__marquee__content",
-        "about__projects__marquee__content__item",
+        "marquee",
+        "marquee__content",
+        "marquee__content__item",
       ].includes(e.target.className)) ||
     e.target === document.body ||
     e.target === document.documentElement

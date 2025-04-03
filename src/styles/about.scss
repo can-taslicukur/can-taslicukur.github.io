@@ -1,8 +1,6 @@
 @use "./theme";
 
 $vertical-spacing: 5rem;
-$marquee-gap: 3rem;
-$marquee-gap-mobile: 1rem;
 $blur-amount: 10px;
 $cards-gap: 2rem;
 
@@ -31,51 +29,6 @@ $cards-gap: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
-  &__marquee {
-    backdrop-filter: blur($blur-amount);
-    transition: 0.3s linear;
-    overflow: hidden;
-    user-select: none;
-    display: flex;
-    gap: $marquee-gap;
-    @media (max-width: 1080px) {
-      gap: $marquee-gap-mobile;
-    }
-
-    &:hover {
-      background-color: theme.t("background");
-      outline: solid theme.t("on-background") 0.3rem;
-
-      .about__projects__marquee__content {
-        animation-play-state: running;
-      }
-    }
-
-    &__content {
-      list-style: none;
-      flex-shrink: 0;
-      min-width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      gap: $marquee-gap;
-      animation: marquee 20s linear infinite;
-      animation-play-state: paused;
-      @media (max-width: 1080px) {
-        gap: $marquee-gap-mobile;
-      }
-
-      &__item {
-        font-size: 3rem;
-        font-weight: bold;
-        text-wrap: nowrap;
-        @media (max-width: 1080px) {
-          font-size: 1.5rem;
-        }
-      }
-    }
-  }
 
   &__cards {
     padding: 1% 10%;
@@ -144,17 +97,4 @@ $cards-gap: 2rem;
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(calc(-100% - $marquee-gap));
-  }
-}
-@media (max-width: 1080px) {
-  @keyframes marquee {
-    to {
-      transform: translateX(calc(-100% - $marquee-gap-mobile));
-    }
-  }
 }

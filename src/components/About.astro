@@ -1,6 +1,22 @@
 ---
 import "../styles/about.scss";
 import IconLink from "./IconLink.astro";
+import Marquee from "./Marquee.astro";
+
+const marqueeItems = [
+  "ᕕ( ᐛ )ᕗ",
+  "SELECTED WORKS",
+  "♪┏(・o･)┛♪",
+  "SELECTED WORKS",
+  "＼(^o^)／",
+  "SELECTED WORKS",
+  "(つ▀¯▀)つ",
+  "SELECTED WORKS",
+  "٩(◕‿◕)۶",
+  "SELECTED WORKS",
+  "╰( ͡°ʖ ͡°)つ──☆*:・ﾟ",
+  "SELECTED WORKS",
+];
 ---
 
 <section id="about">
@@ -27,40 +43,7 @@ import IconLink from "./IconLink.astro";
     </p>
   </div>
   <div class="about__projects">
-    <div class="about__projects__marquee">
-      <ul class="about__projects__marquee__content" aria-hidden="true">
-        <li class="about__projects__marquee__content__item">ᕕ( ᐛ )ᕗ</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">♪┏(・o･)┛♪</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">＼(^o^)／</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">(つ▀¯▀)つ</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">٩(◕‿◕)۶</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">
-          ╰( ͡°ʖ ͡°)つ──☆*:・ﾟ
-        </li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-      </ul>
-      <ul class="about__projects__marquee__content" aria-hidden="true">
-        <li class="about__projects__marquee__content__item">ᕕ( ᐛ )ᕗ</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">♪┏(・o･)┛♪</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">＼(^o^)／</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">(つ▀¯▀)つ</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">٩(◕‿◕)۶</li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-        <li class="about__projects__marquee__content__item">
-          ╰( ͡°ʖ ͡°)つ──☆*:・ﾟ
-        </li>
-        <li class="about__projects__marquee__content__item">SELECTED WORKS</li>
-      </ul>
-    </div>
+    <Marquee items={marqueeItems} />
     <div class="about__projects__cards">
       <div class="about__projects__cards__card">
         <h1 class="about__projects__cards__card__title">gait</h1>

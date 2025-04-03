@@ -1,0 +1,62 @@
+@use "./theme";
+
+$marquee-gap: 3rem;
+$marquee-gap-mobile: 1rem;
+
+.marquee {
+  backdrop-filter: blur(10px);
+  transition: 0.3s linear;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  gap: $marquee-gap;
+  @media (max-width: 1080px) {
+    gap: $marquee-gap-mobile;
+  }
+
+  &:hover {
+    background-color: theme.t("background");
+    outline: solid theme.t("on-background") 0.3rem;
+
+    .marquee__content {
+      animation-play-state: running;
+    }
+  }
+
+  &__content {
+    list-style: none;
+    flex-shrink: 0;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    gap: $marquee-gap;
+    animation: marquee 20s linear infinite;
+    animation-play-state: paused;
+    @media (max-width: 1080px) {
+      gap: $marquee-gap-mobile;
+    }
+
+    &__item {
+      font-size: 3rem;
+      font-weight: bold;
+      text-wrap: nowrap;
+      @media (max-width: 1080px) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-100% - $marquee-gap));
+  }
+}
+@media (max-width: 1080px) {
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-100% - $marquee-gap-mobile));
+    }
+  }
+}

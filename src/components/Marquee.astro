@@ -1,0 +1,22 @@
+---
+import "../styles/marquee.scss";
+
+const { items } = Astro.props;
+---
+
+<div class="marquee">
+  <ul class="marquee__content" aria-hidden="true">
+    {
+      items.map((item: String) => (
+        <li class="marquee__content__item">{item}</li>
+      ))
+    }
+  </ul>
+  <ul class="marquee__content" aria-hidden="true">
+    {
+      items.map((item: String) => (
+        <li class="marquee__content__item">{item}</li>
+      ))
+    }
+  </ul>
+</div>
