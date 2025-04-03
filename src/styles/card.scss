@@ -23,9 +23,11 @@
     animation: 7s rotate linear infinite;
   }
 
+  &__title {
+    margin-bottom: 0.3rem;
+  }
+
   &__subtitle {
-    position: relative;
-    top: -1rem;
     font-size: 0.75rem;
     margin: 0;
   }
@@ -34,6 +36,9 @@
     height: 5rem;
     overflow-x: hidden;
     overflow-y: auto;
+    @media (max-width: 1080px) {
+      height: auto;
+    }
   }
 
   &__links {
