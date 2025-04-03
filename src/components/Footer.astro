@@ -1,0 +1,31 @@
+---
+import "../styles/footer.scss";
+import IconLink from "./IconLink.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__socials">
+    <IconLink
+      icon="linkedin"
+      href="https://www.linkedin.com/in/cantaslicukur/"
+      width="3rem"
+      height="3rem"
+    />
+    <IconLink
+      icon="github"
+      href="https://github.com/can-taslicukur/"
+      width="3rem"
+      height="3rem"
+    />
+    <IconLink
+      icon="email"
+      href="mailto:ege.can.taslicukur@gmail.com"
+      width="3rem"
+      height="3rem"
+    />
+  </div>
+  <p class="footer__copyright">
+    &copy; {year} Ege Can Taslicukur. All rights reserved.
+  </p>
+</footer>
