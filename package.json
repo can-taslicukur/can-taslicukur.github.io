@@ -4,9 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run partytown && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "partytown": "partytown copylib 'public/~partytown'"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",

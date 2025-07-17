@@ -26,6 +26,11 @@
 
 @include theme.apply-theme();
 
+h1 {
+  margin-block: 0.67em;
+  font-size: 2em;
+}
+
 :root {
   background-color: theme.t("background");
   color: theme.t("on-background");
