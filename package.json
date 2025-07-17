@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/partytown": "^2.1.4",
     "astro": "^5.5.2",
     "sass": "^1.86.0",
     "simplex-noise": "^4.0.3"

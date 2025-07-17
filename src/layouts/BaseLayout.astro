@@ -1,6 +1,7 @@
 ---
 import "../styles/global.scss";
 import Footer from "../components/Footer.astro";
+import Gtag from "../components/Gtag.astro";
 
 const { title } = Astro.props;
 ---
@@ -17,8 +18,11 @@ const { title } = Astro.props;
     <style lang="scss"></style>
     <title>{title}</title>
   </head>
+  <Gtag />
   <body>
     <slot />
     <Footer />
   </body>
+
+
 </html>
