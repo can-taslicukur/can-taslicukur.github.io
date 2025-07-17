@@ -18,11 +18,9 @@ const { title } = Astro.props;
     <style lang="scss"></style>
     <title>{title}</title>
   </head>
-  <Gtag />
   <body>
+    <Gtag />
     <slot />
     <Footer />
   </body>
-
-
 </html>
